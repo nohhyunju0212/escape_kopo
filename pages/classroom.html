@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>E-Kopo ClassRoom</title>
+    <link rel="stylesheet" href="../css/style.css" />
+</head>
+<body>
+    <div class="h_img">
+        <div class="img_box">
+            <!-- 교실 배경 이미지 -->
+            <img src="../images/hyun_2.png" alt="교실 배경" />
+
+            <!-- 트리거 1: 칠판 -->
+            <div id="wb"  class="trigger"  onclick="monitor1()"></div>
+
+            <!-- 트리거 2: 창문 -->
+            <div id="wb2" class="trigger2" onclick="monitor2()"></div>
+
+            <!-- 트리거 3: 게시판 -->
+            <div id="wb3" class="trigger3" onclick="monitor3()"></div>
+
+            <!-- 트리거 4: 시계 -->
+            <div id="wb4" class="trigger4" onclick="monitor4()"></div>
+
+            <!-- ════ 왼쪽 인벤토리 (2열×10행) ════ -->
+    <div id="inventory">
+        <div class="inv-label">아이템</div>
+        <div class="inv-divider"></div>
+        <div class="inv-grid" id="inv-grid"></div>
+    </div>
+
+    <!-- ════ 왼쪽 상단 HUD ════ -->
+    <div id="hud-topleft">
+        <div id="loc-badge"><span class="pdot"></span>📍 정원치 교수님 연구실</div>
+        <div id="guide-msg">🔍 공간을 조사해 단서를 찾아보자</div>
+    </div>
+
+    <!-- ════ 오른쪽 상단 MAP ════ -->
+    <div id="hud-topright">
+        <button id="map-toggle" onclick="toggleMap()">🗺 MAP</button>
+        <div id="map-panel">
+        <h3>🗺 MAP — 이동하기</h3>
+        <div class="mroom" onclick="goRoom('강의실')">
+            <div class="mdot"></div>강의실<span class="mtag">→</span>
+        </div>
+        <div class="mroom" onclick="goRoom('장석주 교수님 연구실')">
+            <div class="mdot"></div>장석주 교수님 연구실<span class="mtag">→</span>
+        </div>
+        <div class="mroom here">
+            <div class="mdot"></div>정원치 교수님 연구실<span class="mtag">현재</span>
+        </div>
+        <div class="mroom" onclick="goRoom('휴게실')">
+            <div class="mdot"></div>휴게실<span class="mtag">→</span>
+        </div>
+        <div class="mroom" onclick="goRoom('서버실')">
+            <div class="mdot"></div>서버실<span class="mtag">→</span>
+        </div>
+        </div>
+    </div>
+
+    <!-- ════ 오른쪽 하단 탈출 ════ -->
+    <button id="btn-escape" onclick="openEsc()">🚪 탈출</button>
+
+    <!-- ════ 아이템 팝업 ════ -->
+    <div id="popup">
+        <div class="pbox">
+        <div id="p-icon"></div>
+        <div id="p-title"></div>
+        <div id="p-desc"></div>
+        <div class="pbtns">
+            <button class="btn btn-take" onclick="takeItem()">획득</button>
+            <button class="btn btn-close" onclick="closePopup()">닫기</button>
+        </div>
+        </div>
+    </div>
+
+    <!-- ════ 탈출 팝업 ════ -->
+    <div id="popup-esc">
+        <div class="ebox">
+        <h2>🔐 탈출</h2>
+        <p class="ebox-sub">문에 자물쇠가 걸려 있다.
+    4자리 비밀번호를 입력해야 탈출할 수 있다.</p>
+        <div class="pw-row">
+            <input class="pw-box" id="p0" maxlength="1" oninput="pi(0)" onkeydown="pk(event,0)">
+            <input class="pw-box" id="p1" maxlength="1" oninput="pi(1)" onkeydown="pk(event,1)">
+            <input class="pw-box" id="p2" maxlength="1" oninput="pi(2)" onkeydown="pk(event,2)">
+            <input class="pw-box" id="p3" maxlength="1" oninput="pi(3)" onkeydown="pk(event,3)">
+        </div>
+        <div id="pw-msg"></div>
+        <div class="ebtns">
+            <button class="btn-go" onclick="tryEscape()">탈출한다</button>
+            <button class="btn-back" onclick="closeEsc()">취소</button>
+        </div>
+        </div>
+    </div>
+      <div class="hotspot"
+       style="left:16.75%;top:35.56%;width:4.0%;height:12.89%"
+       onclick="openItem('plant')"></div>
+
+  <div class="hotspot"
+       style="left:36.0%;top:84.44%;width:16.5%;height:8.71%"
+       onclick="openItem('keyboard')"></div>
+
+  <div class="hotspot"
+       style="left:62.75%;top:55.11%;width:3.5%;height:16.0%"
+       onclick="openItem('necklace')"></div>
+
+
+    <!-- ════ 탈출 성공 화면 ════ -->
+    <div id="popup-success">
+        <div class="success-box">
+        <div class="success-emoji">🎉</div>
+        <div class="success-title">탈출 성공!</div>
+        <div class="success-sub">비밀번호가 맞습니다.
+    폴리텍에서 탈출 성공했다!</div>
+        <button class="btn-restart" onclick="location.reload()">다시 시작</button>
+        </div>
+    </div>
+
+    <div id="toast"></div>
+    </div>
+        </div>
+    </div>
+
+    <!-- 팝업 오버레이 -->
+    <div id="monitorScreen" class="monitor">
+        <div class="monitor_content">
+            <div class="monitor_img_wrap">
+                <img id="monitorImg" src="" alt="" />
+            </div>
+            <div class="monitor_info">
+                <div class="monitor_text">
+                    <h3 id="monitorTitle"></h3>
+                    <p  id="monitorDesc"></p>
+                </div>
+                <button class="close_btn" onclick="closeMonitor()">✕</button>
+            </div>
+        </div>
+    </div>
+    
+
+
+
+    <script src="../js/classroom.js"></script>
+</body>
+</html>

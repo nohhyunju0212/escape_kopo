@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="../css/style.css">
+    </head>
+
+    <body>
+        <div class="h_img">
+            <div class="img_box">
+                
+                <img src="../images/hyun_3.png" alt="교실 배경" />
+
+            </div>
+        </div>
+
+        <!-- 팝업 오버레이 -->
+        <div id="monitorScreen" class="monitor">
+            <div class="monitor_content">
+                <div class="monitor_img_wrap">
+                    <img id="monitorImg" src="" alt="" />
+                </div>
+                <div class="monitor_info">
+                    <div class="monitor_text">
+                        <h3 id="monitorTitle"></h3>
+                        <p  id="monitorDesc"></p>
+                    </div>
+                    <button class="close_btn" onclick="closeMonitor()">✕</button>
+                </div>
+            </div>
+        </div>
+
+        <script src="../js/classroom.js"></script>
+    </body>
+</html>
