@@ -40,7 +40,7 @@ body {
 .trigger,
 .trigger2,
 .trigger3,
-.trigger4 {
+.trigger4,.m1,.m2 {
     position: absolute;
     cursor: pointer;
     border-radius: 6px;
@@ -51,7 +51,7 @@ body {
 .trigger:hover,
 .trigger2:hover,
 .trigger3:hover,
-.trigger4:hover {
+.trigger4:hover,.m1,.m2 {
     box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.15);
 }
 
@@ -111,6 +111,33 @@ body {
     border-color: rgba(255, 0, 0, 1);
 }
 
+/* ── 트리거 m1: 종이 (주황) ── 
+.m1 {
+  width: 80px;
+  height: 80px;
+  top: 180px;
+  left: 1260px;
+  background-color: rgba(255, 132, 0, 0.25);
+  border-color: rgba(255, 0, 0, 0.5);
+}
+.m1 {
+  background-color: rgba(255, 0, 0, 0.45);
+  border-color: rgba(255, 0, 0, 1);
+}
+
+/* ── 트리거 m2: 찌그러진종이 (핑크) ── 
+.m2 {
+  width: 80px;
+  height: 80px;
+  top: 180px;
+  left: 1260px;
+  background-color: rgba(255, 0, 183, 0.25);
+  border-color: rgba(255, 0, 0, 0.5);
+}
+.m2 {
+  background-color: rgba(255, 0, 0, 0.45);
+  border-color: rgba(255, 0, 0, 1);
+}
 /* ── 모니터 오버레이 ── */
 .monitor {
     position: fixed;

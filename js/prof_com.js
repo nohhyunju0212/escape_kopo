@@ -22,6 +22,12 @@ function handleBackspace(event, index) {
         }
     }
 }
+const MONITOR_DATA = {
+
+    paper1: { img: '../images/notebook.png', title: '공책', desc: '알수 없는 말이 적혀있다' },
+    paper2: { img: '../images/hint1.png', title: '구겨진 종이', desc: '무언가 적혀있다' }
+};
+
 
 function checkPassword() {
     const pw =

@@ -1,7 +1,7 @@
 const MONITOR_DATA = {
 
-    wb3: { img: '../images/birth.png', title: '게시판', desc: '칠판에 무언가 붙어있다.' },
-    wb4: { img: '../images/monitor4.png', title: '시계', desc: '벽에 걸린 시계. 숫자를 확인해보자.' }
+    wb3: { img: '../images/whatnum.png', title: '칠판', desc: '적혀있다.' },
+    wb4: { img: '../images/birth.png', title: '앐수없는 종이', desc: '누군가의 생일이 적혀있다.' }
 };
 
 function openMonitor(id) {

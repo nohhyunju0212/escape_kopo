@@ -1,37 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Document</title>
-        <link rel="stylesheet" href="../css/style.css">
-    </head>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monitor Password</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="h_img">
+        <div class="img_box">
+            <img src="../images/hyun_4.png" alt="교실 배경" />
+            <button class="back_btn" onclick="goBack()">← 뒤로가기</button>
 
-    <body>
-        <div class="h_img">
-            <div class="img_box">
-                
-                <img src="../images/hyun_3.png" alt="교실 배경" />
+            <div id="paper1"  class="m1"  onclick="monitor1()"></div>
 
-            </div>
+            <!-- 트리거 2: 창문 -->
+            <div id="paper1" class="m2" onclick="monitor2()"></div>
+
         </div>
+    </div>
 
-        <!-- 팝업 오버레이 -->
-        <div id="monitorScreen" class="monitor">
-            <div class="monitor_content">
-                <div class="monitor_img_wrap">
-                    <img id="monitorImg" src="" alt="" />
-                </div>
-                <div class="monitor_info">
-                    <div class="monitor_text">
-                        <h3 id="monitorTitle"></h3>
-                        <p  id="monitorDesc"></p>
-                    </div>
-                    <button class="close_btn" onclick="closeMonitor()">✕</button>
-                </div>
-            </div>
-        </div>
-
-        <script src="../js/classroom.js"></script>
-    </body>
+    <script src="../js/prof_com.js"></script>
+</body>
 </html>
