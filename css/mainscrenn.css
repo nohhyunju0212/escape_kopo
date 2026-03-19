@@ -1,0 +1,253 @@
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;700;900&family=Black+Han+Sans&display=swap');
+
+* { margin:0; padding:0; box-sizing:border-box; }
+:root {
+  --blue: #3f5472;
+  --blue-dark: #455b90;
+  --bg:#07060a;
+}
+html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); font-family:'Noto Serif KR',serif; }
+
+#scene {
+  position:absolute; top:0; left:0;
+  transform-origin:top left;
+  width:1920px; height:1080px;
+  overflow:hidden;
+}
+
+/* ══ 전체 배경 (순수 검정) ══ */
+#bg {
+  position:absolute; inset:0; z-index:0;
+  background:#07060a;
+}
+
+/* ══ 왼쪽 사진 패널 ══ */
+#photo-panel {
+  position:absolute;
+  left:0; top:0;
+  width:900px; height:100%;
+  z-index:5;
+  overflow:hidden;
+}
+#photo-panel img {
+  width:100%; height:100%;
+  object-fit:cover;
+  object-position:center;
+  filter:brightness(0.7) saturate(0.85);
+}
+/* 오른쪽 페이드 */
+#photo-panel::after {
+  content:'';
+  position:absolute; inset:0;
+  background:linear-gradient(90deg,
+    rgba(7,6,10,0) 0%,
+    rgba(7,6,10,0) 55%,
+    rgba(7,6,10,0.75) 80%,
+    rgba(7,6,10,1) 100%);
+}
+/* 상하 비네팅 */
+#photo-panel::before {
+  content:'';
+  position:absolute; inset:0; z-index:1;
+  background:
+    linear-gradient(180deg,rgba(7,6,10,0.45) 0%,transparent 15%,transparent 85%,rgba(7,6,10,0.55) 100%);
+}
+/* 사진 위 레이블 */
+#photo-label {
+  position:absolute;
+  bottom:48px; left:48px;
+  z-index:10;
+  color: #5b6078;
+  font-size:12px;
+  letter-spacing:5px;
+  text-transform:uppercase;
+  animation:fadeIn 2s ease both;
+  animation-delay:0.8s;
+}
+
+/* ══ 세로 구분선 ══ */
+#divider {
+  position:absolute;
+  left:880px; top:80px;
+  width:1px; height:calc(100% - 160px);
+  background:linear-gradient(180deg,
+    transparent 0%,
+    #5b6078 20%,
+    #5b6078 50%,
+    #5b6078 80%,
+    transparent 100%);
+  z-index:20;
+}
+#divider::before {
+  content:''; position:absolute;
+  top:50%; left:50%;
+  transform:translate(-50%,-50%);
+  width:8px; height:8px;
+  background:var(--blue);
+  border-radius:50%;
+  box-shadow:0 0 20px var(--blue);
+}
+
+/* ══ 오른쪽 콘텐츠 ══ */
+#right-area {
+  position:absolute;
+  left:920px; top:0;
+  right:0; height:100%;
+  z-index:10;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:0 80px 0 60px;
+}
+.subtitle-top {
+  color: #5b6078;
+  font-size:14px;
+  letter-spacing:7px;
+  text-transform:uppercase;
+  margin-bottom:22px;
+  animation:fadeUp 1s ease both;
+  animation-delay:0.2s;
+}
+#main-title {
+  font-family:'Black Han Sans', sans-serif;
+  font-size:108px;
+  color:#fff;
+  line-height:0.88;
+  letter-spacing:-2px;
+  margin-bottom:10px;
+  animation:fadeUp 1s ease both;
+  animation-delay:0.4s;
+}
+#main-title .accent {
+  color: #394ec4;
+  text-shadow:0 0 60px #5b6078;
+  display:block;
+}
+.subtitle-bottom {
+  color:#ffffff;
+  font-size:17px;
+  letter-spacing:3px;
+  margin-bottom:64px;
+  animation:fadeUp 1s ease both;
+  animation-delay:0.6s;
+  min-height:26px;
+}
+
+/* ══ 게임 시작 버튼 ══ */
+#btn-start {
+  display:inline-flex;
+  align-items:center;
+  gap:16px;
+  background:transparent;
+  border:2px solid var(--blue);
+  border-radius:4px;
+  color:#b4bbcc;
+  font-family:'Black Han Sans', sans-serif;
+  font-size:26px;
+  letter-spacing:6px;
+  padding:20px 52px;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+  transition:all .25s;
+  align-self:flex-start;
+  animation:fadeUp 1s ease both;
+  animation-delay:0.85s;
+  margin-bottom:28px;
+}
+#btn-start::before {
+  content:'';
+  position:absolute; inset:0;
+  background:var(--blue);
+  transform:translateX(-102%);
+  transition:transform .35s cubic-bezier(.4,0,.2,1);
+  z-index:0;
+}
+#btn-start:hover::before { transform:translateX(0); }
+#btn-start:hover { color:#0a0810; box-shadow:0 0 40px #5b6078; }
+#btn-start:active { transform:scale(0.97); }
+#btn-start span { position:relative; z-index:1; }
+.start-arrow {
+  position:relative; z-index:1;
+  font-size:20px;
+  transition:transform .25s;
+}
+#btn-start:hover .start-arrow { transform:translateX(6px); }
+
+.hint-text {
+  color:rgba(255,255,255,0.18);
+  font-size:13px;
+  letter-spacing:2px;
+  animation:fadeUp 1s ease both;
+  animation-delay:1.05s;
+  min-height:20px;
+}
+
+/* ══ 음악 버튼 ══ */
+#btn-music {
+  position:absolute;
+  top:32px; right:36px;
+  z-index:200;
+  display:flex;
+  align-items:center;
+  gap:9px;
+  background:rgba(0,0,0,.65);
+  border:1.5px solid #5b6078;
+  border-radius:30px;
+  color:#ffffff;
+  font-family:'Noto Serif KR',serif;
+  font-size:14px;
+  letter-spacing:1px;
+  padding:10px 20px;
+  cursor:pointer;
+  transition:all .2s;
+  animation:fadeIn 2s ease both;
+  animation-delay:1.3s;
+}
+#btn-music:hover {
+  background:#5b6078;
+  border-color:var(--blue);
+  color:var(--blue-dark);
+  box-shadow:0 0 14px #5b6078;
+}
+.music-icon { font-size:17px; transition:transform .3s; }
+#btn-music:hover .music-icon { transform:scale(1.2); }
+
+/* ══ 코너 장식 ══ */
+.corner { position:absolute; z-index:25; }
+.corner.tr { top:36px; right:36px; width:50px; height:50px;
+  border-top:2px solid #5b6078; border-right:2px solid #5b6078; }
+.corner.bl { bottom:36px; left:36px; width:50px; height:50px;
+  border-bottom:2px solid rgba(200,147,58,.2); border-left:2px solid rgba(200,147,58,.2); }
+
+/* ══ 하단 바 ══ */
+#bottom-bar {
+  position:absolute; bottom:0; left:0; right:0; height:3px; z-index:20;
+  background:linear-gradient(90deg,transparent 0%,#5b6078 30%,#5b6078 50%,#5b6078 70%,transparent 100%);
+}
+
+/* ══ 스캔라인 ══ */
+#scanlines {
+  position:absolute; inset:0; z-index:90; pointer-events:none;
+  background:repeating-linear-gradient(0deg,transparent,transparent 3px,rgba(0,0,0,.03) 3px,rgba(0,0,0,.03) 4px);
+}
+
+/* ══ 파티클 ══ */
+.particle {
+  position:absolute; border-radius:50%; pointer-events:none; z-index:15;
+  background:#5b6078;
+  animation:pdrift linear infinite;
+}
+@keyframes pdrift {
+  0%   { opacity:0; transform:translateY(0) translateX(0); }
+  10%  { opacity:1; }
+  90%  { opacity:.5; }
+  100% { opacity:0; transform:translateY(-280px) translateX(var(--dx)); }
+}
+
+/* ══ 애니메이션 ══ */
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(28px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+@keyframes fadeIn { from{opacity:0} to{opacity:1} }

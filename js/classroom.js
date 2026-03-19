@@ -1,6 +1,6 @@
 const MONITOR_DATA = {
 
-    wb3: { img: '../images/whatnum.png', title: '칠판', desc: '적혀있다.' },
+    wb3: { img: '../images/whatnum.png', title: '칠판', desc: '숫자가 적혀있다.' },
     wb4: { img: '../images/birth.png', title: '앐수없는 종이', desc: '누군가의 생일이 적혀있다.' }
 };
 
@@ -122,19 +122,48 @@ function takeItem(){
 }
 
 /* ── MAP ── */
-function toggleMap(){ document.getElementById('map-panel').classList.toggle('open'); }
-document.addEventListener('click',e=>{
-  if(!document.getElementById('hud-topright').contains(e.target))
-    document.getElementById('map-panel').classList.remove('open');
+function toggleMap() {
+  document.getElementById("map-panel").classList.toggle("open");
+}
+
+document.addEventListener("click", (e) => {
+  if (!document.getElementById("hud-topright").contains(e.target)) {
+    document.getElementById("map-panel").classList.remove("open");
+  }
 });
+
 let tt;
-function goRoom(r){
-  document.getElementById('map-panel').classList.remove('open');
-  const t=document.getElementById('toast');
-  t.textContent=`📍 ${r} 으로 이동합니다…`;
-  t.classList.add('show');
+
+function goRoom(roomName) {
+  const roomPaths = {
+    "강의실": "./classroom.html",
+    "장석주 교수님 연구실": "./jangprofessorMain.html",
+    "정원치 교수님 연구실": "./jungprofessor.html",
+    "라운지": "./lounge.html",
+    "서버실": "./server-room.html"
+  };
+
+  document.getElementById("map-panel").classList.remove("open");
+
+  const t = document.getElementById("toast");
+  const targetPath = roomPaths[roomName];
+
+  if (!targetPath) {
+    t.textContent = `❗ ${roomName} 페이지가 아직 없습니다.`;
+    t.classList.add("show");
+    clearTimeout(tt);
+    tt = setTimeout(() => t.classList.remove("show"), 2300);
+    return;
+  }
+
+  t.textContent = `📍 ${roomName} 으로 이동합니다…`;
+  t.classList.add("show");
+
   clearTimeout(tt);
-  tt=setTimeout(()=>t.classList.remove('show'),2300);
+  tt = setTimeout(() => {
+    t.classList.remove("show");
+    window.location.href = targetPath;
+  }, 800);
 }
 
 /* ── 탈출 팝업 ── */
@@ -174,7 +203,7 @@ document.addEventListener('keydown',e=>{
 
 
 /* prof_com */
-const PASSWORD = "1111";
+const PASSWORD = "9917";
 
 function moveNext(index) {
     const current = document.getElementById("p" + index);

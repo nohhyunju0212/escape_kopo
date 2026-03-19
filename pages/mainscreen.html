@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>ESCAPE KOPO</title>
+<link rel="stylesheet" href="../css/mainscrenn.css" />
+<body>
+<div id="scene">
+  <div id="bg"></div>
+  <div id="scanlines"></div>
+  <div class="corner tr"></div>
+  <div class="corner bl"></div>
+  <div id="bottom-bar"></div>
+
+  <!-- ════ 왼쪽 사진 패널 (images/pro1.png) ════ -->
+  <div id="photo-panel">
+    <img src="../images/class.png" alt="메인화면">
+    <div id="photo-label">KOREA POLYTECHNICS — RESEARCH LAB</div>
+  </div>
+
+  <!-- ════ 세로 구분선 ════ -->
+  <div id="divider"></div>
+
+  <!-- ════ 오른쪽: 타이틀 + 버튼 ════ -->
+  <div id="right-area">
+    <div class="subtitle-top">KOREA POLYTECHNICS · 2026</div>
+
+    <div id="main-title">
+      ESCAPE<span class="accent">KOPO</span>
+    </div>
+
+    <!-- ↓ 타이틀 아래 한 줄 소개문구 넣는 곳 -->
+    <div class="subtitle-bottom">김연동,김정현,노현주,정아영</div>
+
+    <button id="btn-start" onclick="startGame()">
+      <span>게임 시작</span>
+      <span class="start-arrow">→</span>
+    </button>
+
+    <!-- ↓ 게임 시작 버튼 아래 작은 힌트/설명 넣는 곳 -->
+    <div class="hint-text"><!-- 여기에 짧은 안내 문구를 입력하세요 --></div>
+  </div>
+
+  <!-- ════ 음악 토글 ════ -->
+  <button id="btn-music" onclick="toggleMusic()">
+    <span class="music-icon" id="music-icon">🔊</span>
+    <span id="music-label">배경음악</span>
+  </button>
+
+  <div id="particles"></div>
+
+  <audio id="bgm" loop>
+    <source src="../sound/basic_music.mp3">
+    <source src="../sound/basic_music.mp3">
+  </audio>
+</div>
+<script src="../js/mainscreen.js"></script>
+</body>
+</html>

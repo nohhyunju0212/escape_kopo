@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8" />
+    <title>Kopo 탈출 게임 - 서버실</title>
+    <link rel="stylesheet" href="../css/lounge.css" />
+</head>
+<body>
+    <div id="scene">
+        <!-- 배경 이미지는 HTML에서 직접 넣기 -->
+        <img src="../images/server.jpg" alt="서버실 입구" class="scene-image" />
+
+    <!-- 카드키 핫스팟 -->
+    <div
+        class="hotspot"
+        style="left:44%; top:78%; width:15%; height:18%;"
+        onclick="goLocker()"
+        title="카드키"
+    ></div>
+
+
+    <!-- 왼쪽 인벤토리 -->
+    <div id="inventory">
+        <div class="inv-label">아이템</div>
+        <div class="inv-divider"></div>
+        <div class="inv-grid" id="inv-grid"></div>
+    </div>
+
+    <!-- 왼쪽 상단 HUD -->
+    <div id="hud-topleft">
+        <div id="loc-badge">
+            <span class="pdot"></span>
+            📍 서버실 입구
+        </div>
+        <div id="guide-msg">🔍 서버실을 열 수 있는 단서를 찾아보자</div>
+    </div>
+
+    <!-- 오른쪽 상단 MAP -->
+    <div id="hud-topright">
+    <button id="map-toggle" onclick="toggleMap()">🗺 MAP</button>
+    <div id="map-panel">
+        
+        <h3>🗺 MAP — 이동하기</h3>
+        <div class="mroom" onclick="goRoom('강의실')">
+            <div class="mdot"></div>강의실<span class="mtag">→</span>
+        </div>
+        <div class="mroom" onclick="goRoom('장석주 교수님 연구실')">
+            <div class="mdot"></div>장석주 교수님 연구실<span class="mtag">→</span>
+        </div>
+        <div class="mroom" onclick="goRoom('정원치 교수님 연구실')">
+            <div class="mdot"></div>정원치 교수님 연구실<span class="mtag">→</span>
+        </div>
+        <div class="mroom here" onclick="goRoom('라운지')">
+            <div class="mdot"></div>라운지<span class="mtag">→</span>
+        </div>
+        <div class="mroom here">
+            <div class="mdot"></div>서버실<span class="mtag">현재</span>
+        </div>
+        </div>
+    </div>
+
+    <!-- 오른쪽 하단 탈출 -->
+    <button id="btn-escape" onclick="openEsc()">🚪 탈출</button>
+
+    <!-- 아이템 팝업 -->
+    <div id="popup">
+        <div class="pbox">
+            <div id="p-icon"></div>
+            <div id="p-title"></div>
+            <div id="p-desc"></div>
+            <div class="pbtns">
+                <button class="btn btn-take" onclick="takeItem()">획득</button>
+                <button class="btn btn-close" onclick="closePopup()">닫기</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 탈출 팝업 -->
+    <div id="popup-esc">
+        <div class="ebox">
+            <h2>🔐 탈출</h2>
+            <p class="ebox-sub">
+                문에 자물쇠가 걸려 있다.<br />
+                4자리 비밀번호를 입력해야 탈출할 수 있다.
+            </p>
+
+        <div class="pw-row">
+            <input class="pw-box" id="p0" maxlength="1" oninput="pi(0)" onkeydown="pk(event,0)" />
+            <input class="pw-box" id="p1" maxlength="1" oninput="pi(1)" onkeydown="pk(event,1)" />
+            <input class="pw-box" id="p2" maxlength="1" oninput="pi(2)" onkeydown="pk(event,2)" />
+            <input class="pw-box" id="p3" maxlength="1" oninput="pi(3)" onkeydown="pk(event,3)" />
+        </div>
+
+        <div id="pw-msg"></div>
+
+        <div class="ebtns">
+            <button class="btn-go" onclick="tryEscape()">탈출한다</button>
+            <button class="btn-back" onclick="closeEsc()">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 탈출 성공 -->
+    <div id="popup-success">
+        <div class="success-box">
+            <div class="success-emoji">🎉</div>
+            <div class="success-title">탈출 성공!</div>
+            <div class="success-sub">비밀번호가 맞습니다.<br />탈출 성공!</div>
+            <button class="btn-restart" onclick="location.reload()">다시 시작</button>
+        </div>
+        </div>
+
+        <!-- 이동 토스트 -->
+        <div id="toast"></div>
+    </div>
+
+    <script src="../js/lounge.js"></script>
+</body>
+</html>
