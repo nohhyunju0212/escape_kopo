@@ -46,6 +46,7 @@ function applySolvedState() {
 }
 
 function checkPassword() {
+  playClickSound();
   const pw =
     (document.getElementById("p0")?.value || "") +
     (document.getElementById("p1")?.value || "") +
@@ -80,7 +81,10 @@ function handleComputerClick() {
 }
 
 function goBack() {
-  location.href = "classroom.html";
+  playClickSound();
+  setTimeout(() => {
+    location.href = "classroom.html";
+  }, 300);
 }
 
 document.addEventListener("DOMContentLoaded", () => {

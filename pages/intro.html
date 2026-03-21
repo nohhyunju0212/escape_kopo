@@ -1,0 +1,185 @@
+Intro · HTML
+복사
+
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<title>ESCAPE KOPO — 인트로</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+ 
+html, body {
+  width:100%; height:100%;
+  overflow:hidden;
+  background:#000;
+  font-family:'Malgun Gothic','Apple SD Gothic Neo',sans-serif;
+}
+ 
+#intro-bg {
+  width:100vw;
+  height:100vh;
+  object-fit:contain;  /* ← cover에서 contain으로 변경 */
+  display:block;
+  transition:opacity 0.6s ease;
+  background:#000;     /* ← 여백 검정으로 */
+}
+ 
+/* 하단 텍스트 */
+#caption {
+  position:fixed;
+  bottom:60px; left:50%;
+  transform:translateX(-50%);
+  background:rgba(0,0,0,0.72);
+  color:#f0e2c0;
+  font-size:28px;        /* ← 20px에서 28px로 */
+  padding:20px 48px;     /* ← 패딩도 키움 */
+  border-radius:30px;
+  border:1px solid rgba(200,147,58,0.4);
+  text-align:center;
+  white-space:pre-line;
+  line-height:1.8;       /* ← 줄간격도 조금 늘림 */
+  transition:opacity 0.5s ease;
+  max-width:800px;       /* ← 최대 너비도 키움 */
+}
+ 
+/* 진행 바 */
+#progress-bar {
+  position:fixed;
+  bottom:20px; left:50%;
+  transform:translateX(-50%);
+  display:flex;
+  gap:10px;
+}
+.progress-dot {
+  width:10px; height:10px;
+  border-radius:50%;
+  background:rgba(255,255,255,0.3);
+  transition:background 0.3s;
+}
+.progress-dot.active {
+  background:#c8933a;
+}
+ 
+/* 클릭 힌트 */
+#hint {
+  position:fixed;
+  bottom:42px; right:40px;
+  color:rgba(255,255,255,0.3);
+  font-size:13px;
+  letter-spacing:1px;
+}
+ 
+/* 페이드 오버레이 */
+#fade {
+  position:fixed; inset:0;
+  background:#000;
+  opacity:0;
+  pointer-events:none;
+  transition:opacity 0.6s ease;
+  z-index:999;
+}
+</style>
+</head>
+<body>
+ 
+<img id="intro-bg" src="../images/intro0.png" alt="인트로">
+ 
+<div id="caption">...</div>
+ 
+<div id="progress-bar"></div>
+ 
+<div id="hint">클릭하면 빨리 넘어갑니다</div>
+ 
+<div id="fade"></div>
+ 
+<script>
+const SCENES = [
+  { img: '../images/intro0.png', text: '으... 머리 아파' },
+  { img: '../images/intro1.png', text: '지금 몇시지?' },
+  { img: '../images/intro2.png', text: '뭐야 벌써 10시가 지났네' },
+  { img: '../images/intro3.png', text: '엘리베이터가 멈췄네? 다른 방법으로 학교에서 나갈 방법을 찾아봐야겠어' },
+];
+ 
+const DURATION = 3500; // 장면당 자동 넘김 시간 (ms)
+ 
+let idx = 0;
+let timer = null;
+let moving = false;
+ 
+const bgEl       = document.getElementById('intro-bg');
+const captionEl  = document.getElementById('caption');
+const barEl      = document.getElementById('progress-bar');
+const fadeEl     = document.getElementById('fade');
+ 
+// 진행 도트 생성
+SCENES.forEach((_, i) => {
+  const dot = document.createElement('div');
+  dot.className = 'progress-dot';
+  dot.id = 'dot' + i;
+  barEl.appendChild(dot);
+});
+ 
+function updateDots() {
+  SCENES.forEach((_, i) => {
+    document.getElementById('dot' + i).classList.toggle('active', i === idx);
+  });
+}
+ 
+function showScene(i) {
+  bgEl.style.opacity = '0';
+  captionEl.style.opacity = '0';
+ 
+  setTimeout(() => {
+    bgEl.src = SCENES[i].img;
+    captionEl.textContent = SCENES[i].text;
+    bgEl.style.opacity = '1';
+    captionEl.style.opacity = '1';
+    updateDots();
+  }, 600);
+}
+ 
+function next() {
+  if (moving) return;
+  clearTimeout(timer);
+ 
+  if (idx < SCENES.length - 1) {
+    idx++;
+    showScene(idx);
+    scheduleNext();
+  } else {
+    goToGame();
+  }
+}
+ 
+function goToGame() {
+  moving = true;
+  fadeEl.style.opacity = '1';
+  setTimeout(() => {
+    location.href = 'classroom.html';
+  }, 700);
+}
+ 
+function scheduleNext() {
+  clearTimeout(timer);
+  timer = setTimeout(next, DURATION);
+}
+ 
+// 초기화
+showScene(0);
+scheduleNext();
+ 
+// 클릭으로 빨리 넘기기
+document.addEventListener('click', next);
+
+document.addEventListener('click', () => {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  
+  const snd = new Audio('../sound/click.mp3');
+  snd.volume = 0.5;
+  snd.play().catch(()=>{});
+});
+
+</script>
+</body>
+</html>

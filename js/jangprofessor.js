@@ -179,6 +179,7 @@ function openItem(id) {
 }
 
 function closePopup() {
+  playClickSound();
   document.getElementById("popup").classList.remove("show", "view-mode");
   cur = null;
 }
@@ -204,18 +205,32 @@ function takeItem() {
 }
 
 function goDesk() {
-  location.href = "./jangprofessorDesk.html";
+  playClickSound();
+  setTimeout(() => {
+    location.href = "./jangprofessorDesk.html";
+  }, 300);
+  
 }
 
 function gobook() {
-  location.href = "./jangprofessorBookcase.html";
+  playClickSound();
+  setTimeout(() => {
+    location.href = "./jangprofessorBookcase.html";
+  }, 300);
+ 
 }
 
 function goMain() {
-  location.href = "./jangprofessorMain.html";
+  playClickSound();
+  setTimeout(() => {
+    location.href = "./jangprofessorMain.html";
+  }, 300);
+
+
 }
 
 function toggleMap() {
+  playClickSound();
   const panel = document.getElementById("map-panel");
   if (panel) panel.classList.toggle("open");
 }
@@ -236,7 +251,7 @@ function goRoom(roomName) {
     "강의실": "./classroom.html",
     "장석주 교수님 연구실": "./jangprofessorMain.html",
     "정원치 교수님 연구실": "./jungprofessor.html",
-    "휴게실": "./lounge.html",
+    "라운지": "./lounge.html",
     "서버실": "./server-room.html"
   };
 
@@ -256,6 +271,11 @@ function goRoom(roomName) {
     return;
   }
 
+  const snd = new Audio("../sound/footstep.wav");
+  snd.volume = 0.9;
+  snd.currentTime = 0.05;
+  snd.play().catch(() => {});
+
   if (t) {
     t.textContent = `📍 ${roomName} 으로 이동합니다…`;
     t.classList.add("show");
@@ -265,14 +285,11 @@ function goRoom(roomName) {
   tt = setTimeout(() => {
     if (t) t.classList.remove("show");
     location.href = targetPath;
-  }, 800);
+  }, 1600);
 }
 
-const snd = new Audio("../sound/footstep.mp3");
-snd.volume = 0.8;
-snd.play().catch(() => {});
-
 function openEsc() {
+  playClickSound();
   [0, 1, 2, 3].forEach((i) => {
     const el = document.getElementById("p" + i);
     if (el) el.value = "";
@@ -291,6 +308,7 @@ function openEsc() {
 }
 
 function closeEsc() {
+  playClickSound();
   const popupEsc = document.getElementById("popup-esc");
   if (popupEsc) popupEsc.classList.remove("show");
 }
@@ -321,6 +339,7 @@ function pk(e, i) {
 }
 
 function tryEscape() {
+  playClickSound();
   const pw = [0, 1, 2, 3]
     .map((i) => document.getElementById("p" + i)?.value || "")
     .join("");

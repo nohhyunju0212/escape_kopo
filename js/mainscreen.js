@@ -48,5 +48,15 @@ function toggleMusic(){
 function startGame(){
   scene.style.transition='opacity 0.6s ease';
   scene.style.opacity='0';
-  setTimeout(()=>{ window.location.href='classroom.html'; },600);
+  setTimeout(()=>{ window.location.href='intro.html'; },600);
 }
+
+let audioCtx = null;
+
+document.addEventListener('click', () => {
+  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+  
+  const snd = new Audio('../sound/click.mp3');
+  snd.volume = 0.5;
+  snd.play().catch(()=>{});
+});

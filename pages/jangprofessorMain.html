@@ -52,7 +52,7 @@
 
         <!-- MAP : 다시 이미지 안 -->
         <div id="hud-topright">
-          <button id="map-toggle" onclick="toggleMap()">🗺 MAP</button>
+          <button id="map-toggle" onclick="toggleMap(event)">🗺 MAP</button>
           <div id="map-panel">
             <h3>🗺 MAP — 이동하기</h3>
 
@@ -68,8 +68,8 @@
               <div class="mdot"></div>정원치 교수님 연구실<span class="mtag">→</span>
             </div>
 
-            <div class="mroom" onclick="goRoom('휴게실')">
-              <div class="mdot"></div>휴게실<span class="mtag">→</span>
+            <div class="mroom" onclick="goRoom('라운지')">
+              <div class="mdot"></div>라운지<span class="mtag">→</span>
             </div>
 
             <div class="mroom" onclick="goRoom('서버실')">

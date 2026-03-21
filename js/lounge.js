@@ -8,19 +8,30 @@ const LOUNGE_ITEMS = ["sofaNote", "serverNote", "locker415", "locker417", "lette
 
 /* 상세 페이지 이동 */
 function goLocker() {
-  window.location.href = "./locker.html";
+  playClickSound();
+  setTimeout(() => {
+    window.location.href = "./locker.html";
+  }, 300);
 }
 
 function goSofa() {
-  window.location.href = "./sofa.html";
+  playClickSound();
+  setTimeout(() => {
+    window.location.href = "./sofa.html";
+  }, 300);
 }
 
 function goBack() {
-  location.href = "lounge.html";
+  playClickSound();
+  setTimeout(() => {
+    location.href = "lounge.html";
+  }, 300);
 }
 
 /* 이미지 팝업 */
 function openImagePopup(imagePath) {
+  playClickSound();
+
   const popup = document.getElementById("image-popup");
   const popupImage = document.getElementById("popup-image");
   if (!popup || !popupImage) return;
@@ -31,6 +42,8 @@ function openImagePopup(imagePath) {
 
 function closeImagePopup(event) {
   if (event && event.target !== event.currentTarget) return;
+
+  playClickSound();
 
   const popup = document.getElementById("image-popup");
   const popupImage = document.getElementById("popup-image");
@@ -47,6 +60,8 @@ let fireTriggered = false;
 const COOLER_LIMIT_MS = 5000;
 
 function cool() {
+  playClickSound();
+
   if (fireTriggered) return;
 
   const coolerHotspot = document.getElementById("cooler-hotspot");
@@ -141,6 +156,7 @@ function showPopup(id, viewOnly = false) {
 
 function openItem(id) {
   playClickSound();
+
   if (InventoryManager.has(id)) {
     showPopup(id, true);
     return;
@@ -149,23 +165,29 @@ function openItem(id) {
 }
 
 function closePopup() {
+  playClickSound();
+
   const popup = document.getElementById("popup");
   if (!popup) return;
+
   popup.classList.remove("show", "view-mode");
   cur = null;
 }
 
 function takeItem() {
   if (!cur) return;
+
   playClickSound();
-  InventoryManager.add(cur);
+
+  const takenId = cur;
+  InventoryManager.add(takenId);
   InventoryManager.render("inv-grid", true);
   syncTakenHotspots();
 
   closePopup();
 
   const toast = document.getElementById("toast");
-  const data = InventoryManager.getItemData(cur);
+  const data = InventoryManager.getItemData(takenId);
 
   if (toast && data) {
     toast.textContent = `👜 ${data.name} 획득`;
@@ -176,7 +198,10 @@ function takeItem() {
 }
 
 /* 맵 */
-function toggleMap() {
+function toggleMap(e) {
+  if (e) e.stopPropagation();
+  playClickSound();
+
   const panel = document.getElementById("map-panel");
   if (panel) panel.classList.toggle("open");
 }
@@ -196,35 +221,37 @@ function goRoom(roomName) {
   const t = document.getElementById("toast");
   const targetPath = roomPaths[roomName];
 
-  if (!t) {
-    if (targetPath) window.location.href = targetPath;
-    return;
-  }
-
   if (!targetPath) {
-    t.textContent = `❗ ${roomName} 페이지가 아직 없습니다.`;
-    t.classList.add("show");
-    clearTimeout(tt);
-    tt = setTimeout(() => t.classList.remove("show"), 2300);
+    if (t) {
+      t.textContent = `❗ ${roomName} 페이지가 아직 없습니다.`;
+      t.classList.add("show");
+      clearTimeout(tt);
+      tt = setTimeout(() => t.classList.remove("show"), 2300);
+    }
     return;
   }
 
-  t.textContent = `📍 ${roomName} 으로 이동합니다…`;
-  t.classList.add("show");
+  if (t) {
+    t.textContent = `📍 ${roomName} 으로 이동합니다…`;
+    t.classList.add("show");
+  }
 
-  const snd = new Audio("sound/footstep.mp3");
-  snd.volume = 0.8;
+  const snd = new Audio("../sound/footstep.wav");
+  snd.volume = 0.9;
+  snd.currentTime = 0.05;
   snd.play().catch(() => {});
 
   clearTimeout(tt);
   tt = setTimeout(() => {
-    t.classList.remove("show");
+    if (t) t.classList.remove("show");
     window.location.href = targetPath;
-  }, 800);
+  }, 1600);
 }
 
 /* 탈출 */
 function openEsc() {
+  playClickSound();
+
   [0, 1, 2, 3].forEach((i) => {
     const el = document.getElementById("p" + i);
     if (el) el.value = "";
@@ -244,6 +271,8 @@ function openEsc() {
 }
 
 function closeEsc() {
+  playClickSound();
+
   const popup = document.getElementById("popup-esc");
   if (popup) popup.classList.remove("show");
 }
@@ -264,12 +293,20 @@ function pk(e, i) {
   const current = document.getElementById("p" + i);
   if (!current) return;
 
-  if (e.key === "Backspace" && !current.value && i > 0) {
-    e.preventDefault();
-    const prev = document.getElementById("p" + (i - 1));
-    if (prev) {
-      prev.value = "";
-      prev.focus();
+  if (e.key === "Backspace") {
+    if (current.value !== "") {
+      current.value = "";
+      e.preventDefault();
+      return;
+    }
+
+    if (i > 0) {
+      e.preventDefault();
+      const prev = document.getElementById("p" + (i - 1));
+      if (prev) {
+        prev.value = "";
+        prev.focus();
+      }
     }
     return;
   }
@@ -281,6 +318,8 @@ function pk(e, i) {
 }
 
 function tryEscape() {
+  playClickSound();
+
   const pw = [0, 1, 2, 3]
     .map((i) => document.getElementById("p" + i)?.value || "")
     .join("");
@@ -337,10 +376,29 @@ function closeSuccessOnEsc() {
 }
 
 document.addEventListener("keydown", (e) => {
-  if (e.key === "Escape") {
+  if (e.key !== "Escape") return;
+
+  const popup = document.getElementById("popup");
+  const esc = document.getElementById("popup-esc");
+  const imagePopup = document.getElementById("image-popup");
+  const success = document.getElementById("popup-success");
+
+  if (popup && popup.classList.contains("show")) {
     closePopup();
+    return;
+  }
+
+  if (esc && esc.classList.contains("show")) {
     closeEsc();
+    return;
+  }
+
+  if (imagePopup && imagePopup.classList.contains("show")) {
     closeImagePopup();
+    return;
+  }
+
+  if (success && success.classList.contains("show")) {
     closeSuccessOnEsc();
   }
 });
@@ -370,13 +428,4 @@ document.addEventListener("DOMContentLoaded", () => {
       if (e.target === escPopup) closeEsc();
     });
   }
-});
-
-let audioCtx = null;
-document.addEventListener("click", () => {
-  if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-
-  const snd = new Audio("sound/click.mp3");
-  snd.volume = 0.5;
-  snd.play().catch(() => {});
 });

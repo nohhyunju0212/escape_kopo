@@ -7,6 +7,8 @@ const PW = "0162";
 let tt = null;
 
 function openMonitor(id) {
+  playClickSound();
+
   const data = MONITOR_DATA[id];
   if (!data) return;
 
@@ -27,11 +29,17 @@ function openMonitor(id) {
 }
 
 function monitor1() {
-  location.href = "prof_com.html";
+  playClickSound();
+  setTimeout(() => {
+    location.href = "prof_com.html";
+  }, 300);
 }
 
 function monitor2() {
-  location.href = "my_com.html";
+  playClickSound();
+  setTimeout(() => {
+    location.href = "my_com.html";
+  }, 300);
 }
 
 function monitor3() {
@@ -43,6 +51,8 @@ function monitor4() {
 }
 
 function closeMonitor() {
+  playClickSound();
+
   const screen = document.getElementById("monitorScreen");
   if (!screen) return;
   if (!screen.classList.contains("active") && screen.style.display === "none") return;
@@ -57,10 +67,13 @@ function closeMonitor() {
 }
 
 function toggleMap() {
-  const panel = document.getElementById("map-panel");
-  if (panel) panel.classList.toggle("open");
-}
+  playClickSound();
 
+  const panel = document.getElementById("map-panel");
+  if (panel) {
+    panel.classList.toggle("open");
+  }
+}
 function goRoom(roomName) {
   const roomPaths = {
     "강의실": "./classroom.html",
@@ -76,30 +89,40 @@ function goRoom(roomName) {
   const t = document.getElementById("toast");
   const targetPath = roomPaths[roomName];
 
-  if (!t) {
-    if (targetPath) window.location.href = targetPath;
-    return;
-  }
-
   if (!targetPath) {
-    t.textContent = `❗ ${roomName} 페이지가 아직 없습니다.`;
-    t.classList.add("show");
-    clearTimeout(tt);
-    tt = setTimeout(() => t.classList.remove("show"), 2300);
+    if (t) {
+      t.textContent = `❗ ${roomName} 페이지가 아직 없습니다.`;
+      t.classList.add("show");
+      clearTimeout(tt);
+      tt = setTimeout(() => t.classList.remove("show"), 2300);
+    }
     return;
   }
 
-  t.textContent = `📍 ${roomName} 으로 이동합니다…`;
-  t.classList.add("show");
+  // 🔥 발소리 직접 객체 생성
+  const snd = new Audio("../sound/footstep.wav");
+  snd.volume = 0.8;
+
+  snd.play().catch(() => {
+    window.location.href = targetPath;
+  });
+
+  const duration = snd.duration || 3; // 못 가져오면 3초
+
+  if (t) {
+    t.textContent = `📍 ${roomName} 으로 이동합니다…`;
+    t.classList.add("show");
+  }
 
   clearTimeout(tt);
   tt = setTimeout(() => {
-    t.classList.remove("show");
+    if (t) t.classList.remove("show");
     window.location.href = targetPath;
-  }, 800);
+  }, 1600);
 }
-
 function openEsc() {
+  playClickSound();
+
   [0, 1, 2, 3].forEach(i => {
     const el = document.getElementById("p" + i);
     if (el) el.value = "";
@@ -118,6 +141,8 @@ function openEsc() {
 }
 
 function closeEsc() {
+  playClickSound();
+
   const esc = document.getElementById("popup-esc");
   if (!esc) return;
   esc.style.display = "none";
@@ -158,6 +183,8 @@ function pk(e, i) {
 }
 
 function tryEscape() {
+  playClickSound();
+
   const pw = [0, 1, 2, 3]
     .map(i => document.getElementById("p" + i)?.value || "")
     .join("");
@@ -185,6 +212,7 @@ function tryEscape() {
 }
 
 function closePopup() {
+  playClickSound();
   InventoryManager.closeItemPopup();
 }
 

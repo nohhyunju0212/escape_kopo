@@ -12,6 +12,7 @@ const DESK_DATA = {
 };
 
 function openDeskItem(id) {
+  playClickSound();
   const data = DESK_DATA[id];
   if (!data) return;
 
@@ -32,6 +33,7 @@ function openDeskItem(id) {
 }
 
 function closeMonitor() {
+  playClickSound();
   const screen = document.getElementById("monitorScreen");
   if (!screen) return;
 
@@ -44,7 +46,10 @@ function closeMonitor() {
 }
 
 function goBack() {
-  location.href = "classroom.html";
+  playClickSound();
+  setTimeout(() => {
+    location.href = "classroom.html";
+  }, 300);
 }
 
 document.addEventListener("keydown", (e) => {
