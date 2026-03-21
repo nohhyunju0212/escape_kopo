@@ -54,36 +54,9 @@
           </div>
 
           <!-- 오른쪽 상단 MAP -->
+          <!-- 오른쪽 상단 뒤로가기 -->
           <div id="hud-topright">
-            <button id="map-toggle" onclick="toggleMap()">🗺 MAP</button>
-            <div id="map-panel">
-              <h3>🗺 MAP — 이동하기</h3>
-
-              <div class="mroom" onclick="goRoom('강의실')">
-                <div class="mdot"></div>
-                강의실<span class="mtag">→</span>
-              </div>
-
-              <div class="mroom here">
-                <div class="mdot"></div>
-                장석주 교수님 연구실<span class="mtag">현재</span>
-              </div>
-
-              <div class="mroom" onclick="goRoom('정원치 교수님 연구실')">
-                <div class="mdot"></div>
-                정원치 교수님 연구실<span class="mtag">→</span>
-              </div>
-
-              <div class="mroom" onclick="goRoom('휴게실')">
-                <div class="mdot"></div>
-                휴게실<span class="mtag">→</span>
-              </div>
-
-              <div class="mroom" onclick="goRoom('서버실')">
-                <div class="mdot"></div>
-                서버실<span class="mtag">→</span>
-              </div>
-            </div>
+            <button id="top-back" onclick="goMain()">↩ 뒤로가기</button>
           </div>
 
           <!-- 오른쪽 하단 탈출 -->
@@ -168,6 +141,8 @@
 
     <div id="toast"></div>
 
-    <script src="../js/jangprofessor.js"></script>
+    <script src="../js/common_inventory.js"></script>
+    <script src="../js/common_sound.js"></script>
+    <script src="../js/jangprofessor.js"></script>  
   </body>
 </html>

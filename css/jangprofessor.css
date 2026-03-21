@@ -50,11 +50,11 @@ body {
 
 .inv-label {
   color: #c8933a;
-  font-size: clamp(10px, 0.85vw, 13px);
+  font-size: clamp(12px, 0.95vw, 15px);
   font-weight: 700;
-  letter-spacing: 0.2em;
-  writing-mode: vertical-rl;
+  letter-spacing: 0.08em;
   margin-bottom: 4px;
+  writing-mode: horizontal-tb;
 }
 
 .inv-divider {
@@ -582,4 +582,25 @@ body {
 
 #toast.show {
   opacity: 1;
+}
+#top-back {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  background: rgba(0,0,0,0.85);
+  border: 2px solid #5a9fc0;
+  border-radius: 12px;
+  color: #8bc8e8;
+  font-size: clamp(12px, 1.25vw, 20px);
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  padding: 0.9em 1.5em;
+  cursor: pointer;
+  transition: background 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+}
+
+#top-back:hover {
+  background: rgba(90,159,192,0.2);
+  box-shadow: 0 0 18px rgba(90,159,192,0.3);
 }

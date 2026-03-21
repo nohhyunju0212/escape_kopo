@@ -1,83 +1,86 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Kopo 탈출 게임 - 소파</title>
-    <link rel="stylesheet" href="../css/lounge.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kopo 탈출 게임 - 소파</title>
+  <link rel="stylesheet" href="../css/lounge.css" />
 </head>
 <body>
-    <div class="h_img">
-        <div class="img_box">
-            <img src="../images/sofa.jpg" alt="소파" />
+  <div class="stage">
+    <div class="play-area">
+      <div id="inventory">
+        <div class="inv-label">아이템</div>
+        <div class="inv-divider"></div>
+        <div class="inv-grid" id="inv-grid"></div>
+      </div>
 
-            <div class="hotspot"
-                 style="left:27%; top:48%; width:15%; height:20%;"
-                 onclick="openItem('sofaNote')" title="소파에서 주운 쪽지"></div>
+      <div class="scene-wrap">
+        <img src="../images/sofa.jpg" alt="소파" class="scene-image" />
 
-            <div id="inventory">
-                <div class="inv-label">아이템</div>
-                <div class="inv-divider"></div>
-                <div class="inv-grid" id="inv-grid"></div>
-            </div>
+        <div class="hotspot"
+             style="left:27%; top:48%; width:15%; height:20%;"
+             onclick="openItem('sofaNote')" title="소파에서 주운 쪽지"></div>
 
-            <div id="hud-topleft">
-                <div id="loc-badge">
-                    <span class="pdot"></span>📍 라운지 > 소파
-                </div>
-                <div id="guide-msg">🔍 소파에서 무언가 단서를 찾아보자</div>
-            </div>
-
-            <button class="back_btn" onclick="goBack()">← 뒤로가기</button>
-
-            <button id="btn-escape" onclick="openEsc()">🚪 탈출</button>
-
-            <div id="popup">
-                <div class="pbox">
-                    <div id="p-icon"></div>
-                    <div id="p-title"></div>
-                    <div id="p-desc"></div>
-                    <div class="pbtns">
-                        <button class="btn btn-take" onclick="takeItem()">획득</button>
-                        <button class="btn btn-close" onclick="closePopup()">닫기</button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="popup-esc">
-                <div class="ebox">
-                    <h2>🔐 탈출</h2>
-                    <p class="ebox-sub">
-                        문에 자물쇠가 걸려 있다.<br />
-                        4자리 비밀번호를 입력해야 탈출할 수 있다.
-                    </p>
-                    <div class="pw-row">
-                        <input class="pw-box" id="p0" maxlength="1" oninput="pi(0)" onkeydown="pk(event,0)" />
-                        <input class="pw-box" id="p1" maxlength="1" oninput="pi(1)" onkeydown="pk(event,1)" />
-                        <input class="pw-box" id="p2" maxlength="1" oninput="pi(2)" onkeydown="pk(event,2)" />
-                        <input class="pw-box" id="p3" maxlength="1" oninput="pi(3)" onkeydown="pk(event,3)" />
-                    </div>
-                    <div id="pw-msg"></div>
-                    <div class="ebtns">
-                        <button class="btn-go" onclick="tryEscape()">탈출한다</button>
-                        <button class="btn-back" onclick="closeEsc()">취소</button>
-                    </div>
-                </div>
-            </div>
-
-            <div id="popup-success">
-                <div class="success-box">
-                    <div class="success-emoji">🎉</div>
-                    <div class="success-title">탈출 성공!</div>
-                    <div class="success-sub">비밀번호가 맞습니다.<br />탈출 성공!</div>
-                    <button class="btn-restart" onclick="location.reload()">다시 시작</button>
-                </div>
-            </div>
-
-            <div id="toast"></div>
+        <div id="hud-topleft">
+          <div id="loc-badge">
+            <span class="pdot"></span>📍 라운지 > 소파
+          </div>
+          <div id="guide-msg">🔍 소파에서 무언가 단서를 찾아보자</div>
         </div>
-    </div>
 
-    <script src="../js/lounge.js"></script>
+        <button class="back_btn" onclick="goBack()">← 뒤로가기</button>
+        <button id="btn-escape" onclick="openEsc()">🚪 탈출</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup">
+    <div class="pbox">
+      <div id="p-icon"></div>
+      <div id="p-title"></div>
+      <div id="p-desc"></div>
+      <div class="pbtns">
+        <button class="btn btn-take" onclick="takeItem()">획득</button>
+        <button class="btn btn-close" onclick="closePopup()">닫기</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup-esc">
+    <div class="ebox">
+      <h2>🔐 탈출</h2>
+      <p class="ebox-sub">
+        문에 자물쇠가 걸려 있다.<br />
+        4자리 비밀번호를 입력해야 탈출할 수 있다.
+      </p>
+      <div class="pw-row">
+        <input class="pw-box" id="p0" maxlength="1" oninput="pi(0)" onkeydown="pk(event,0)" />
+        <input class="pw-box" id="p1" maxlength="1" oninput="pi(1)" onkeydown="pk(event,1)" />
+        <input class="pw-box" id="p2" maxlength="1" oninput="pi(2)" onkeydown="pk(event,2)" />
+        <input class="pw-box" id="p3" maxlength="1" oninput="pi(3)" onkeydown="pk(event,3)" />
+      </div>
+      <div id="pw-msg"></div>
+      <div class="ebtns">
+        <button class="btn-go" onclick="tryEscape()">탈출한다</button>
+        <button class="btn-back" onclick="closeEsc()">취소</button>
+      </div>
+    </div>
+  </div>
+
+  <div id="popup-success">
+    <div class="success-box">
+      <div class="success-emoji">🎉</div>
+      <div class="success-title">탈출 성공!</div>
+      <div class="success-sub">비밀번호가 맞습니다.<br />탈출 성공!</div>
+      <button class="btn-restart" onclick="location.reload()">다시 시작</button>
+    </div>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="../js/common_inventory.js"></script>
+  <script src="../js/common_sound.js"></script>
+  <script src="../js/lounge.js"></script>
 </body>
 </html>

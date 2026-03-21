@@ -1,96 +1,96 @@
-const PASSWORD ="9917";
+const PASSWORD = "9917";
 const DEFAULT_IMAGE = "../images/hyun_3.png";
 const SOLVED_IMAGE = "../images/hyun_3_open.png";
 const STORAGE_KEY = "computerSolved_prof";
 
 function moveNext(index) {
-    const current = document.getElementById("p" + index);
-    current.value = current.value.replace(/[^0-9]/g, "");
+  const current = document.getElementById("p" + index);
+  if (!current) return;
 
-    if (current.value.length === 1 && index < 3) {
-        document.getElementById("p" + (index + 1)).focus();
-    }
+  current.value = current.value.replace(/[^0-9]/g, "").slice(0, 1);
+
+  if (current.value.length === 1 && index < 3) {
+    const next = document.getElementById("p" + (index + 1));
+    if (next) next.focus();
+  }
 }
 
 function handleBackspace(event, index) {
-    const current = document.getElementById("p" + index);
+  const current = document.getElementById("p" + index);
+  if (!current) return;
 
-    if (event.key === "Backspace") {
-        if (current.value === "" && index > 0) {
-            const prev = document.getElementById("p" + (index - 1));
-            prev.value = "";
-            prev.focus();
-            event.preventDefault();
-        }
+  if (event.key === "Backspace") {
+    if (current.value === "" && index > 0) {
+      event.preventDefault();
+      const prev = document.getElementById("p" + (index - 1));
+      if (prev) {
+        prev.value = "";
+        prev.focus();
+      }
     }
+    return;
+  }
+
+  if (event.key === "Enter") {
+    event.preventDefault();
+    checkPassword();
+  }
 }
 
 function applySolvedState() {
-    const bgImage = document.getElementById("bgImage");
-    const passwordBox = document.getElementById("passwordBox");
+  const bgImage = document.getElementById("bgImage");
+  const passwordBox = document.getElementById("passwordBox");
 
-    bgImage.src = SOLVED_IMAGE;
-    if (passwordBox) {
-        passwordBox.style.display = "none";
-    }
+  if (bgImage) bgImage.src = SOLVED_IMAGE;
+  if (passwordBox) passwordBox.style.display = "none";
 }
 
 function checkPassword() {
-    const pw =
-        document.getElementById("p0").value +
-        document.getElementById("p1").value +
-        document.getElementById("p2").value +
-        document.getElementById("p3").value;
+  const pw =
+    (document.getElementById("p0")?.value || "") +
+    (document.getElementById("p1")?.value || "") +
+    (document.getElementById("p2")?.value || "") +
+    (document.getElementById("p3")?.value || "");
 
-    const msg = document.getElementById("pw_msg");
+  const msg = document.getElementById("pw_msg");
+  if (!msg) return;
 
-    if (pw === PASSWORD) {
-        msg.style.color = "#66ff99";
-        msg.textContent = "비밀번호가 맞았습니다!";
+  if (pw === PASSWORD) {
+    msg.style.color = "#66ff99";
+    msg.textContent = "비밀번호가 맞았습니다!";
 
-        localStorage.setItem(STORAGE_KEY, "true");
-        applySolvedState();
-    } else {
-        msg.style.color = "#ff6666";
-        msg.textContent = "비밀번호가 틀렸습니다.";
+    localStorage.setItem(STORAGE_KEY, "true");
+    applySolvedState();
+  } else {
+    msg.style.color = "#ff6666";
+    msg.textContent = "비밀번호가 틀렸습니다.";
 
-        document.getElementById("p0").value = "";
-        document.getElementById("p1").value = "";
-        document.getElementById("p2").value = "";
-        document.getElementById("p3").value = "";
-        document.getElementById("p0").focus();
-    }
+    ["p0", "p1", "p2", "p3"].forEach(id => {
+      const el = document.getElementById(id);
+      if (el) el.value = "";
+    });
+
+    document.getElementById("p0")?.focus();
+  }
 }
 
 function handleComputerClick() {
-    const solved = localStorage.getItem(STORAGE_KEY) === "true";
-
-    if (solved) {
-        applySolvedState();
-    } else {
-        const passwordBox = document.getElementById("passwordBox");
-        if (passwordBox) {
-            passwordBox.style.display = "block";
-        }
-    }
+  const solved = localStorage.getItem(STORAGE_KEY) === "true";
+  if (solved) applySolvedState();
 }
 
 function goBack() {
-    location.href = "classroom.html";
+  location.href = "classroom.html";
 }
 
-document.addEventListener("DOMContentLoaded", function () {
-    const solved = localStorage.getItem(STORAGE_KEY) === "true";
+document.addEventListener("DOMContentLoaded", () => {
+  const solved = localStorage.getItem(STORAGE_KEY) === "true";
+  const bgImage = document.getElementById("bgImage");
 
-    if (solved) {
-        applySolvedState();
-    } else {
-        document.getElementById("bgImage").src = DEFAULT_IMAGE;
-    }
-});
-
-document.addEventListener("keydown", function (e) {
-    if (e.key === "Enter") {
-        checkPassword();
-    }
+  if (solved) {
+    applySolvedState();
+  } else {
+    if (bgImage) bgImage.src = DEFAULT_IMAGE;
+    document.getElementById("p0")?.focus();
+  }
 });

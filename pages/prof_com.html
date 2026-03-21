@@ -1,34 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitor Password</title>
-    <link rel="stylesheet" href="../css/classroom.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Professor Computer</title>
+  <link rel="stylesheet" href="../css/classroom.css" />
 </head>
 <body>
-    <div class="h_img">
+  <div class="h_img">
     <div class="img_box">
-        <img id="bgImage" src="../images/hyun_3.png" alt="교실 배경" />
+      <img id="bgImage" src="../images/hyun_3.png" alt="교실 배경" />
 
-        <button class="back_btn" onclick="goBack()">← 뒤로가기</button>
+      <button class="back_btn" onclick="goBack()">← 뒤로가기</button>
 
-        <div class="computer_trigger" onclick="handleComputerClick()"></div>
+      <!--<div class="computer_trigger" onclick="handleComputerClick()"></div>-->
 
-        <div class="password_box" id="passwordBox">
-            <h2>비밀번호 입력</h2>
-            <div class="pw_row">
-                <input type="text" class="pw_input" id="p0" maxlength="1" oninput="moveNext(0)" onkeydown="handleBackspace(event, 0)">
-                <input type="text" class="pw_input" id="p1" maxlength="1" oninput="moveNext(1)" onkeydown="handleBackspace(event, 1)">
-                <input type="text" class="pw_input" id="p2" maxlength="1" oninput="moveNext(2)" onkeydown="handleBackspace(event, 2)">
-                <input type="text" class="pw_input" id="p3" maxlength="1" oninput="moveNext(3)" onkeydown="handleBackspace(event, 3)">
-            </div>
-            <p id="pw_msg"></p>
-            <button class="pw_btn" onclick="checkPassword()">확인</button>
+      <div class="password_box" id="passwordBox">
+        <h2>비밀번호 입력</h2>
+        <div class="pw_row">
+          <input type="text" class="pw_input" id="p0" maxlength="1" oninput="moveNext(0)" onkeydown="handleBackspace(event, 0)" />
+          <input type="text" class="pw_input" id="p1" maxlength="1" oninput="moveNext(1)" onkeydown="handleBackspace(event, 1)" />
+          <input type="text" class="pw_input" id="p2" maxlength="1" oninput="moveNext(2)" onkeydown="handleBackspace(event, 2)" />
+          <input type="text" class="pw_input" id="p3" maxlength="1" oninput="moveNext(3)" onkeydown="handleBackspace(event, 3)" />
         </div>
+        <p id="pw_msg"></p>
+        <button class="pw_btn" onclick="checkPassword()">확인</button>
+      </div>
     </div>
-</div>
+  </div>
 
-    <script src="../js/prof_com.js"></script>
+  <script src="../js/prof_com.js"></script>
+  <script src="../js/common_sound.js"></script>
 </body>
 </html>

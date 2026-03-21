@@ -1,37 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Monitor Password</title>
-    <link rel="stylesheet" href="../css/classroom.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>My Computer</title>
+  <link rel="stylesheet" href="../css/classroom.css" />
 </head>
 <body>
-    <div class="h_img">
-        <div class="img_box">
-            <img src="../images/hyun_4.png" alt="교실 배경" />
-            <button class="back_btn" onclick="goBack()">← 뒤로가기</button>
+  <div class="h_img">
+    <div class="img_box">
+      <img src="../images/hyun_4.png" alt="교실 배경" />
+      <button class="back_btn" onclick="goBack()">← 뒤로가기</button>
 
-            <div class="desk_trigger paper_trigger" onclick="openDeskItem('paper')"></div>
-            <div class="desk_trigger notebook_trigger" onclick="openDeskItem('notebook')"></div>
-        </div>
+      <div class="desk_trigger paper_trigger" onclick="openDeskItem('paper')"></div>
+      <div class="desk_trigger notebook_trigger" onclick="openDeskItem('notebook')"></div>
     </div>
+  </div>
 
-    <div id="monitorScreen" class="monitor">
-        <div class="monitor_content">
-            <div class="monitor_img_wrap">
-                <img id="monitorImg" src="" alt="" />
-            </div>
-            <div class="monitor_info">
-                <div class="monitor_text">
-                    <h3 id="monitorTitle"></h3>
-                    <p id="monitorDesc"></p>
-                </div>
-                <button class="close_btn" onclick="closeMonitor()">✕</button>
-            </div>
+  <div id="monitorScreen" class="monitor">
+    <div class="monitor_content">
+      <div class="monitor_img_wrap">
+        <img id="monitorImg" src="" alt="" />
+      </div>
+      <div class="monitor_info">
+        <div class="monitor_text">
+          <h3 id="monitorTitle"></h3>
+          <p id="monitorDesc"></p>
         </div>
+        <button class="close_btn" onclick="closeMonitor()">✕</button>
+      </div>
     </div>
+  </div>
 
-    <script src="../js/my_com.js"></script>
+  <script src="../js/my_com.js"></script>
+  <script src="../js/common_sound.js"></script>
 </body>
 </html>
