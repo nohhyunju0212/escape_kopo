@@ -46,7 +46,7 @@ function showPopup(id, viewOnly) {
     d.t === "i" ? `<img src="${d.icon}" alt="${d.name}">` : d.icon;
 
   document.getElementById("p-title").textContent = d.name;
-  document.getElementById("p-desc").textContent = d.desc;
+  document.getElementById("p-desc").innerHTML = d.desc;
 
   /* 핵심: 상태 완전 초기화 */
   popup.classList.remove("show", "view-mode");
@@ -123,7 +123,7 @@ function goRoom(roomName) {
     "장석주 교수님 연구실": "./jangprofessorMain.html",
     "정원치 교수님 연구실": "./jungprofessor.html",
     "라운지": "./lounge.html",
-    "서버실": "./server-room.html"
+    "서버실": "./server.html"
   };
 
   const panel = document.getElementById("map-panel");

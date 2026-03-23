@@ -20,37 +20,19 @@ for(let i=0;i<22;i++){
   pCon.appendChild(p);
 }
 
-/* ── 배경음악 ── */
-const bgm=document.getElementById('bgm');
-let muted=false;
-addEventListener('click',()=>{
-  if(bgm.paused&&!muted){ bgm.volume=0.35; bgm.play().catch(()=>{}); }
-},{once:true});
-
-function toggleMusic(){
-  muted=!muted;
-  const icon=document.getElementById('music-icon');
-  const label=document.getElementById('music-label');
-  const btn=document.getElementById('btn-music');
-  if(muted){
-    bgm.pause();
-    icon.textContent='🔇'; label.textContent='음소거';
-    btn.style.borderColor='rgba(255,255,255,0.2)';
-    btn.style.color='rgba(255,255,255,0.3)';
-  } else {
-    bgm.volume=0.35; bgm.play().catch(()=>{});
-    icon.textContent='🔊'; label.textContent='배경음악';
-    btn.style.borderColor=''; btn.style.color='';
-  }
-}
-
 /* ── 게임 시작 ── */
 function startGame(){
-  scene.style.transition='opacity 0.6s ease';
-  scene.style.opacity='0';
-  setTimeout(()=>{ window.location.href='intro.html'; },600);
-}
+  localStorage.removeItem("global_escape_inventory");
 
+  saveBgmTime();
+
+  scene.style.transition = 'opacity 0.6s ease';
+  scene.style.opacity = '0';
+
+  setTimeout(() => {
+    window.location.href = 'intro.html';
+  }, 600);
+}
 let audioCtx = null;
 
 document.addEventListener('click', () => {

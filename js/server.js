@@ -3,28 +3,38 @@ const PW = "0126";
 let cur = null;
 let tt = null;
 
-/* 라운지에서 쓰는 아이템 id 목록 */
-const LOUNGE_ITEMS = ["sofaNote", "serverNote", "locker415", "locker417", "letter"];
+function tryEnterServer() {
+  const t = document.getElementById("toast");
+
+  if (!InventoryManager.has("severKey")) {
+    // 카드키 없음
+    if (t) {
+      t.textContent = `🔒 카드키가 없어서 열 수 없습니다.`;
+      t.classList.add("show");
+      setTimeout(() => t.classList.remove("show"), 2300);
+    }
+    return;
+  }
+
+  // 카드키 있음 → 이동
+  if (t) {
+    t.textContent = `📍 서버실로 입장합니다…`;
+    t.classList.add("show");
+  }
+
+  setTimeout(() => {
+    if (t) t.classList.remove("show");
+    location.href = "./server-room.html";
+  }, 1600);
+}
+
 
 /* 상세 페이지 이동 */
-function goLocker() {
-  playClickSound();
-  setTimeout(() => {
-    window.location.href = "./locker.html";
-  }, 300);
-}
-
-function goSofa() {
-  playClickSound();
-  setTimeout(() => {
-    window.location.href = "./sofa.html";
-  }, 300);
-}
 
 function goBack() {
   playClickSound();
   setTimeout(() => {
-    location.href = "lounge.html";
+    location.href = "server-room.html";
   }, 300);
 }
 
@@ -53,6 +63,75 @@ function closeImagePopup(event) {
   popupImage.src = "";
 }
 
+/* 서버실 쿨러 */
+let coolerOn = true;
+let coolerTimer = null;
+let fireTriggered = false;
+const COOLER_LIMIT_MS = 5000;
+
+function cool() {
+  playClickSound();
+
+  if (fireTriggered) return;
+
+  const coolerHotspot = document.getElementById("cooler-hotspot");
+  const guideMsg = document.getElementById("guide-msg");
+  const toast = document.getElementById("toast");
+
+  if (coolerOn) {
+    coolerOn = false;
+
+    if (coolerHotspot) coolerHotspot.classList.remove("cooler-on");
+    if (guideMsg) {
+      guideMsg.textContent = "⚠ 쿨러가 꺼졌습니다. 5초 안에 다시 켜지 않으면 화재가 발생합니다.";
+    }
+    if (toast) {
+      toast.textContent = "⚠ 쿨러 OFF — 5초 안에 다시 켜야 합니다.";
+      toast.classList.add("show");
+      setTimeout(() => toast.classList.remove("show"), 1800);
+    }
+
+    clearTimeout(coolerTimer);
+    coolerTimer = setTimeout(() => {
+      triggerFireEvent();
+    }, COOLER_LIMIT_MS);
+
+    return;
+  }
+
+  coolerOn = true;
+  clearTimeout(coolerTimer);
+  coolerTimer = null;
+
+  if (coolerHotspot) coolerHotspot.classList.add("cooler-on");
+  if (guideMsg) guideMsg.textContent = "✅ 쿨러가 다시 작동합니다. 서버실이 안정화되었습니다.";
+  if (toast) {
+    toast.textContent = "❄ 쿨러 ON — 정상 상태로 복구되었습니다.";
+    toast.classList.add("show");
+    setTimeout(() => toast.classList.remove("show"), 1800);
+  }
+}
+
+function triggerFireEvent() {
+  fireTriggered = true;
+  coolerOn = false;
+  coolerTimer = null;
+
+  const coolerHotspot = document.getElementById("cooler-hotspot");
+  const popupFire = document.getElementById("popup-fire");
+  const guideMsg = document.getElementById("guide-msg");
+
+  if (coolerHotspot) {
+    coolerHotspot.classList.remove("cooler-on");
+    coolerHotspot.classList.add("taken");
+  }
+  if (guideMsg) guideMsg.textContent = "🔥 쿨러 정지로 인해 서버실에 화재가 발생했습니다.";
+  if (popupFire) popupFire.classList.add("show");
+
+  setTimeout(() => {
+    window.location.href = "./mainscreen.html";
+  }, 3000);
+}
 
 /* 아이템 팝업 */
 function showPopup(id, viewOnly = false) {

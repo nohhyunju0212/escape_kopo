@@ -80,7 +80,7 @@ function goRoom(roomName) {
     "장석주 교수님 연구실": "./jangprofessorMain.html",
     "정원치 교수님 연구실": "./jungprofessor.html",
     "라운지": "./lounge.html",
-    "서버실": "./server-room.html"
+    "서버실": "./server.html"
   };
 
   const panel = document.getElementById("map-panel");
@@ -98,6 +98,7 @@ function goRoom(roomName) {
     }
     return;
   }
+
 
   // 🔥 발소리 직접 객체 생성
   const snd = new Audio("../sound/footstep.wav");

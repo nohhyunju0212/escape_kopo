@@ -137,6 +137,7 @@ body {
   border: 2px solid transparent;
   transition: border-color 0.15s, background-color 0.15s, box-shadow 0.15s;
   z-index: 20;
+
 }
 
 .trigger:hover,
@@ -154,27 +155,31 @@ body {
   height: 17%;
   top: 38%;
   left: 28%;
+  
 }
 
 .trigger2 {
-  width: 8%;
+  width: 10%;
   height: 10%;
-  top: 31%;
+  top: 25%;
   left: 58%;
+ 
 }
 
 .trigger3 {
   width: 9%;
   height: 13%;
-  top: 20%;
-  left: 88%;
+  top: 15%;
+  left: 90%;
+
 }
 
 .trigger4 {
   width: 3%;
   height: 6%;
-  top: 25%;
-  left: 84%;
+  top: 19%;
+  left: 86%;
+  
 }
 
 #hud-topleft {
@@ -236,9 +241,9 @@ body {
   align-items: center;
   gap: 9px;
   background: rgba(0,0,0,0.85);
-  border: 2px solid #5a9fc0;
+  border: 2px solid #C9A54C;
   border-radius: 12px;
-  color: #8bc8e8;
+  color: #C9A54C;
   font-size: clamp(12px, 1.25vw, 20px);
   font-weight: 700;
   letter-spacing: 0.08em;
@@ -260,7 +265,7 @@ body {
   right: 0;
   width: min(310px, 26vw);
   background: rgba(6,5,3,0.97);
-  border: 2px solid #5a9fc0;
+  border: 2px solid #aa945c;
   border-radius: 14px;
   padding: 18px 16px;
   z-index: 300;
@@ -272,7 +277,7 @@ body {
 }
 
 #map-panel h3 {
-  color: #8bc8e8;
+  color: #C9A54C;
   font-size: clamp(12px, 1.05vw, 17px);
   letter-spacing: 0.08em;
   margin-bottom: 14px;
@@ -526,7 +531,7 @@ body {
 .btn-back {
   background: transparent;
   color: #888;
-  border: 2px solid #3a3a3a;
+  border: 2px solid #99683a;
   padding: 16px 36px;
   font-size: 18px;
   font-weight: 700;
@@ -746,9 +751,9 @@ body {
   align-items: center;
   gap: 9px;
   background: rgba(0,0,0,0.85);
-  border: 2px solid #5a9fc0;
+  border: 2px solid #a08255;
   border-radius: 12px;
-  color: #8bc8e8;
+  color: #a08255;
   font-size: clamp(12px, 1.25vw, 20px);
   font-weight: 700;
   letter-spacing: 0.08em;

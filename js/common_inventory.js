@@ -3,9 +3,9 @@ const InventoryManager = (() => {
 
   const ITEM_DATA = {
     sofaNote: {
-  t: "e",
-  icon: "📝",
-  inv: "📝",
+  t: "i",
+  icon: "../images/110.png",
+  inv: "../images/110.png",
   name: "찢어진 메모",
   desc:
     "소파 밑에 끼어 있던 작은 메모.\n\n" +
@@ -13,32 +13,22 @@ const InventoryManager = (() => {
     "정체 모를 숫자가 적혀 있다.\n탈출 비밀번호와 관련이 있어 보인다."
 },
 
-serverNote: {
-  t: "e",
-  icon: "📝",
-  inv: "📝",
-  name: "메모 모음",
+locker415: {
+  t: "i",
+  icon: "../images/ribon.png",
+  inv: "../images/ribon.png",
+  name: "누군가의 사물함",
   desc:
-    "서버실 벽에 붙어있는 메모.\n\n" +
-    "「 ...... 」\n\n" +
-    "~~~ 가 적혀 있다.\n탈출 비밀번호와 관련이 있어 보인다."
+    "💕👚🧠💓💖💗💘💝💞🎀\n\n" +
+    " 으 ... \n\n" +
+    "사물함 속 분홍색 물건 밖에 없다.\n단순히 사물함 주인의 취향일까?"
 },
 
-locker415: {
-  t: "e",
-  icon: "📚",
-  inv: "📚",
-  name: "쌓여있는 책",
-  desc:
-    "지저분한 사물함 속 쌓여있는 책.\n\n" +
-    "「 ...110... 」\n\n" +
-    "정체 모를 숫자가 적혀 있다.\n탈출 비밀번호와 관련이 있어 보인다."
-},
 
 locker417: {
-  t: "e",
-  icon: "🥢🥄",
-  inv: "🥢🥄",
+  t: "i",
+  icon: "../images/nf.png",
+  inv: "../images/nf.png",
   name: "수저포크",
   desc:
     "수저와 포크...\n\n" +
@@ -46,28 +36,24 @@ locker417: {
 },
 
 letter: {
-  t: "e",
-  icon: "✉️",
-  inv: "✉️",
+  t: "i",
+  icon: "../images/message.png",
+  inv: "../images/message.png",
   name: "편지",
   desc:
     "이 편지는 영국에서 최초로 시작되어...\n\n" +
     "에이씨...\n7통을 보내야 한다고?"
 },
-    plant: {
-      t: "e",
-      icon: "🪨",
-      inv: "🪨",
-      name: "교수님의 애완돌",
-      desc: '매끄럽고 동그란 돌멩이.\n교수님이 화분 옆에 소중히 올려두었다.\n뒷면에 작게 "행운을 빌어" 라고 새겨져 있다.'
-    },
-    note: {
-      t: "e",
-      icon: "📝",
-      inv: "📝",
-      name: "숫자가 적힌 쪽지",
-      desc: '키보드 밑에 끼워진 작은 메모지.\n\n「  0  」\n\n이 숫자가 비밀번호의 단서일까…'
-    },
+      plant:{
+    t:'i', icon:"../images/rock.png", inv:"../images/rock.png",
+    name:'교수님의 애완돌',
+    desc:'교수님이 화분 옆에 소중히 올려두었다.\n뒷면에 주황색 낙서들이 있다.\n교수님이 주황색을 좋아하시나??'
+  },
+  note:{
+  t:'i', icon:"../images/orange_0.png", inv:"../images/orange_0.png",
+  name:'숫자가 적힌 쪽지',
+  desc:'키보드 밑에 끼워진 작은 메모지.\n\n<span style="color:#ff8c00; font-size:28px; font-weight:900;">0</span> \n\n이 숫자가 비밀번호의 단서일까…'
+},
     necklace: {
       t: "i",
       icon: "../images/pro2.jpg",
@@ -90,9 +76,9 @@ letter: {
       desc: "숫자가 적혀 있는 쪽지다."
     },
     memo: {
-      t: "e",
-      icon: "📝",
-      inv: "📝",
+      t: "i",
+      icon: "../images/memo.webp",
+      inv: "../images/memo.webp",
       name: "교수님의 메모장",
       desc: "mEmo.\nduddjfh 2"
     },
@@ -112,25 +98,19 @@ letter: {
     },
     Shelf: {
       t: "i",
-      icon: "../images/confidential.png",
-      inv: "../images/confidential.png",
-      name: "confidential",
-      desc: "교수님의 기밀문서.\n뭐라쓰지...."
+      icon: "../images/jang.jpg",
+      inv: "../images/jang.jpg",
+      name: "교수님의 과거사진...",
+      desc: "장교수님의 10년전 사진을 봐버렸다...."
     },
     locker: {
       t: "i",
-      icon: "../images/N.png",
-      inv: "../images/N.png",
+      icon: "../images/N.webp",
+      inv: "../images/N.webp",
       name: "나침반",
-      desc: "..."
-    },
-    bookcase: {
-      t: "e",
-      icon: "📚",
-      inv: "📚",
-      name: "책꽂이",
-      desc: "책꽂이 안에 책과 서류가 빽빽하게 꽂혀 있다."
+      desc: "N이 유난히 눈에 띈다"
     }
+    
   };
 
   function load() {
@@ -192,7 +172,7 @@ letter: {
       : d.icon;
 
     title.textContent = d.name;
-    desc.textContent = d.desc;
+    desc.innerHTML = d.desc;
 
     popup.style.display = "flex";
     popup.classList.add("show");

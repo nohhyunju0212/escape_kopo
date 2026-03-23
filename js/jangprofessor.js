@@ -1,47 +1,4 @@
-const JANG_ITEMS = {
-  memo: {
-    t: "e",
-    icon: "📝",
-    inv: "📝",
-    name: "교수님의 메모장",
-    desc: "mEmo.\nduddjfh 2"
-  },
-  display: {
-    t: "i",
-    icon: "../images/o.png",
-    inv: "../images/o.png",
-    name: "교수님의 모니터",
-    desc: "모니터를 켰는데 배경화면이 조금 이상하다.\n세모, 네모, 동그라미, 육각형\n왜 동그라미만 색깔이 다를까?"
-  },
-  severKey: {
-    t: "i",
-    icon: "../images/serverKey.png",
-    inv: "../images/serverKey.png",
-    name: "서버실 카드키",
-    desc: "서버실 카드키"
-  },
-  Shelf: {
-    t: "i",
-    icon: "../images/confidential.png",
-    inv: "../images/confidential.png",
-    name: "confidential",
-    desc: "교수님의 기밀문서.\n뭐라쓰지...."
-  },
-  locker: {
-    t: "i",
-    icon: "../images/N.png",
-    inv: "../images/N.png",
-    name: "나침반",
-    desc: "..."
-  },
-  bookcase: {
-    t: "e",
-    icon: "📚",
-    inv: "📚",
-    name: "책꽂이",
-    desc: "책꽂이 안에 책과 서류가 빽빽하게 꽂혀 있다."
-  }
-};
+
 
 const PW = "0162";
 let cur = null;
@@ -252,7 +209,7 @@ function goRoom(roomName) {
     "장석주 교수님 연구실": "./jangprofessorMain.html",
     "정원치 교수님 연구실": "./jungprofessor.html",
     "라운지": "./lounge.html",
-    "서버실": "./server-room.html"
+    "서버실": "./server.html"
   };
 
   const panel = document.getElementById("map-panel");
@@ -270,6 +227,7 @@ function goRoom(roomName) {
     }
     return;
   }
+
 
   const snd = new Audio("../sound/footstep.wav");
   snd.volume = 0.9;

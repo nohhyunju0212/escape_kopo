@@ -111,7 +111,7 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); fon
 #main-title {
   font-family:'Black Han Sans', sans-serif;
   font-size:108px;
-  color:#fff;
+  color:#405885;
   line-height:0.88;
   letter-spacing:-2px;
   margin-bottom:10px;
@@ -119,20 +119,51 @@ html, body { width:100%; height:100%; overflow:hidden; background:var(--bg); fon
   animation-delay:0.4s;
 }
 #main-title .accent {
-  color: #394ec4;
-  text-shadow:0 0 60px #5b6078;
-  display:block;
-}
-.subtitle-bottom {
-  color:#ffffff;
-  font-size:17px;
-  letter-spacing:3px;
-  margin-bottom:64px;
-  animation:fadeUp 1s ease both;
-  animation-delay:0.6s;
-  min-height:26px;
+  position: relative;
+  display: block;
+  color: #ffffff54; /* 기본 블루그레이 */
+  letter-spacing: 2px;
+
 }
 
+/* 본체 질감 */
+#main-title .accent::before {
+  content: "KOPO";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+
+
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  opacity: 0.95;
+}
+
+/* UI 색감에 맞춘 거친 페인트 자국 */
+#main-title .accent::after {
+  content: "KOPO";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+
+  background:
+    linear-gradient(
+      
+      #ffffff77 80%,   /* 너무 금색 아닌 탁한 메탈톤 */
+      transparent 88%
+    ),
+    url('../images/paint-texture.png') center/cover;
+
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+
+  background-blend-mode: overlay;
+  filter: contrast(2.1) saturate(1.15) brightness(1.02);
+  opacity: 0.78;
+}
 /* ══ 게임 시작 버튼 ══ */
 #btn-start {
   display:inline-flex;
